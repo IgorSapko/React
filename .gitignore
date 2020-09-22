@@ -6,8 +6,8 @@
 *.editorconfig
 *.prettierrc
 *.prettierrc
-package-lock.json
-package.json
+#package-lock.json
+#package.json
 postcss.config.js
 *.md
 # Logs
