@@ -46,7 +46,7 @@ margin-bottom: 10px;
 const Percentage = StatisticsStyles.span`
 font-size:20px;
 `;
-function Statistics({ title, stats, children }) {
+function Statistics({ title, stats }) {
   return (
     <StatisticsSection>
       {title && <Title>{title}</Title>}
@@ -58,8 +58,8 @@ function Statistics({ title, stats, children }) {
           } else
             return (
               <StatsListItem key={elem.id}>
-                <Label key={elem.id + 1}>{elem.label}</Label>
-                <Percentage key={elem.id + 2}>{elem.percentage}%</Percentage>
+                <Label>{elem.label}</Label>
+                <Percentage>{elem.percentage}%</Percentage>
               </StatsListItem>
             );
         })}

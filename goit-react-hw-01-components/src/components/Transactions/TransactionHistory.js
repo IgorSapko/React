@@ -33,7 +33,6 @@ function TransactionHistory({ items }) {
       </thead>
       {items.map((elem, i) => {
         if (i % 2 !== 0) {
-          
           return (
             <tbody key={elem.id}>
               <tr>
@@ -57,5 +56,16 @@ function TransactionHistory({ items }) {
     </TransactionHistoryTable>
   );
 }
+
+TransactionHistory.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      type: PropTypes.string,
+      amount: PropTypes.string,
+      currency: PropTypes.string,
+    }),
+  ),
+};
 
 export default TransactionHistory;

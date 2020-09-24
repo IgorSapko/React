@@ -92,9 +92,9 @@ Profile.defaultProps = {
   // location : 'NewYork',
   avatar: 'https://happycoin.club/wp-content/uploads/2020/03/leo.jpg',
   stats: {
-    followers: 1000,
-    views: 1000,
-    likes: 1000,
+    followers: 'XX',
+    views: 'XX',
+    likes: 'XX',
   },
 };
 
@@ -103,7 +103,11 @@ Profile.propTypes = {
   tag: PropTypes.string,
   location: PropTypes.string.isRequired,
   avatar: PropTypes.string,
-  stats: PropTypes.object,
+  stats: PropTypes.shape({
+    followers: PropTypes.number,
+    views: PropTypes.number,
+    likes: PropTypes.number,
+  }),
 };
 
 export default Profile;

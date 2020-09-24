@@ -20,7 +20,9 @@ export default function App() {
         stats={userData.stats}
       />
 
-      <Statistics stats={statisticalData} />
+      <Statistics stats={statisticalData} 
+      title = ""
+      />
 
       <FriendList dataOfFriends={friendsData}>
  

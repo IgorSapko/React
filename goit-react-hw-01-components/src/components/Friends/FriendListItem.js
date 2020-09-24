@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes, { number } from 'prop-types';
 import FriendsStyles from 'styled-components';
 
-function FriendListItem({ isOnline, avatar, name }) {
-  const FriendsListItem = FriendsStyles.li`
+const FriendsListItemStyles = FriendsStyles.li`
   width: 300px;
   border: 2px solid;
   &:not(:last-child) {margin-bottom:10px};
@@ -26,8 +25,10 @@ border: 6px solid green;
 border-radius: 12px;
 background-color:green
   `;
+function FriendListItem({ isOnline, avatar, name }) {
+  
   return (
-    <FriendsListItem className="item">
+    <FriendsListItemStyles className="item">
       {isOnline ? (
         <SpanSatatusGreen className="status">{isOnline}</SpanSatatusGreen>
       ) : (
@@ -35,7 +36,7 @@ background-color:green
       )}
       <img className="avatar" src={avatar} alt="" width="48" />
       <p className="name">{name}</p>
-    </FriendsListItem>
+    </FriendsListItemStyles>
   );
 }
 
