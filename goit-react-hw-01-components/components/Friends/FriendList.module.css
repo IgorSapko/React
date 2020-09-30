@@ -1,5 +1,0 @@
-.list:not(:last-child){
-
-    border: 3px solid red;
-border-radius: 3px;
-}
