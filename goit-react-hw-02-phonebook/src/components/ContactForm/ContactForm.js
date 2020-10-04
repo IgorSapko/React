@@ -29,31 +29,19 @@ export default class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     const { name, number } = this.state;
-    const newContact = {
-      id: uuidv4(),
-      name: name,
-      number: number,
-    };
-    let index = 0;
-    this.props.contacts.filter((elem, i) => {
-      if (elem.name.toLowerCase() === newContact.name.toLowerCase()) {
-        this.setState(() => ({ name: '' }));
-        index = i;
-        return alert(`${elem.name} is already in сontacts`);
-      } else if (
-        i === this.props.contacts.length - 1 &&
-        name &&
-        this.props.contacts[index].name.toLowerCase() !==
-          newContact.name.toLowerCase()
-      ) {
-        const newArrayContacts = [...this.props.contacts, ...newContact];
-        this.props.handleUpdateContacts(newArrayContacts);
-        this.setState(() => {
-          return { name: '' };
-        });
-      }
-    });
+    if (name) {
+      const newContact = {
+        id: uuidv4(),
+        name: name,
+        number: number,
+      };
+      this.props.handleCheckContact(newContact);
+      this.setState(() => {
+        return { name: '', number: '' };
+      });
+    }
   };
 
   render() {
@@ -90,16 +78,5 @@ export default class ContactForm extends Component {
 
 ContactForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  handleUpdateContacts: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string,
-    }),
-  ).isRequired,
-};
-
-ContactForm.defaultProps = {
-  contacts: [{ number: 'empty' }],
+  handleCheckContact: PropTypes.func.isRequired,
 };

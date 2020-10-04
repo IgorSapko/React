@@ -7,20 +7,16 @@ const ButtonsListStyles = FeedbackStyles.ul`
 &>button:hover{background:blue; 
 cursor:pointer}
 `;
-function Feedback({ onLeaveFeedback }) {
+function Feedback({ onLeaveFeedback, options }) {
   return (
     <ButtonsListStyles className="buttonsList">
-      <button type="button" onClick={onLeaveFeedback}>
-        Good
-      </button>
-
-      <button type="button" onClick={onLeaveFeedback}>
-        Neutral
-      </button>
-
-      <button type="button" onClick={onLeaveFeedback}>
-        Bad
-      </button>
+      {options.map(elem => {
+        return (
+          <button key={elem} type="button" onClick={onLeaveFeedback}>
+            {elem[0].toUpperCase() + elem.slice(1)}
+          </button>
+        );
+      })}
     </ButtonsListStyles>
   );
 }

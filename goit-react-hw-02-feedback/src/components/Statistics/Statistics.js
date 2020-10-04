@@ -13,7 +13,7 @@ font-size:18px;
 font-weight:700px
 `;
 
-function Statistics({ good, neutral, bad }) {
+function Statistics({ good, neutral, bad, positivePercentage, total }) {
   return good || neutral || bad ? (
     <div>
       <List>
@@ -31,11 +31,11 @@ function Statistics({ good, neutral, bad }) {
         </li>
         <li>
           <span>Total:</span>
-          <span>{neutral + good + bad}</span>
+          <span>{total}</span>
         </li>
         <li>
           <span>Positive feedback:</span>
-          <span>{Math.round((good / (neutral + good + bad)) * 100)}%</span>
+          <span>{positivePercentage}%</span>
         </li>
       </List>
     </div>

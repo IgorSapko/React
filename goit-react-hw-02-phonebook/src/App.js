@@ -24,21 +24,34 @@ export default class App extends Component {
   handleDeleteContact = e => {
     const { contacts } = this.state;
 
-    let index;
-    contacts.forEach((elem, i) => {
-      if (
-        elem.name.toLowerCase() ===
+    let contactsAfterDeleting = contacts.filter(elem => {
+      return (
+        elem.name.toLowerCase() !==
         e.nativeEvent.path[1].childNodes[0].childNodes[0].textContent.toLowerCase()
-      ) {
-        index = i;
-      }
+      );
     });
-    contacts.splice(index, 1);
+
     this.setState(() => {
-      return { contacts: contacts };
+      return { contacts: contactsAfterDeleting };
     });
   };
 
+  handleCheckContact = checkedContact => {
+    const { contacts, name } = this.state;
+    console.log('name', name);
+    contacts.filter((elem, i) => {
+      if (elem.name.toLowerCase() === checkedContact.name.toLowerCase()) {
+        return alert(`${elem.name} is already in сontacts`);
+      } else if (
+        elem.name.toLowerCase() !== checkedContact.name.toLowerCase() &&
+        i === contacts.length - 1
+      ) {
+        contacts.push(checkedContact);
+
+        this.handleUpdateContacts(contacts);
+      }
+    });
+  };
   handleUpdateContacts = contacts => {
     this.setState(() => {
       return { contacts: contacts };
@@ -64,29 +77,27 @@ export default class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     let newContacts = this.handleFilterContact(contacts);
-
+    let contactsForContactList;
+    if (filter) {
+      contactsForContactList = newContacts;
+    } else {
+      contactsForContactList = contacts;
+    }
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm
           handleChange={this.handleChange}
-          handleUpdateContacts={this.handleUpdateContacts}
-          contacts={contacts}
+          handleCheckContact={this.handleCheckContact}
         />
 
         <h2>Contacts</h2>
         <Filter
           handleChange={this.handleChange}
           filter={filter}
-          contacts={contacts}
-          handleDeleteContact={this.handleDeleteContact}
-          handleUpdateContacts={this.handleUpdateContacts}
-        />
+                 />
         <ContactList
-          contacts={contacts}
-          newContacts={newContacts}
-          filter={filter}
-          handleFilterContact={this.handleFilterContact}
+          contacts={contactsForContactList}
           handleDeleteContact={this.handleDeleteContact}
         ></ContactList>
       </div>

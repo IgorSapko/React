@@ -17,11 +17,9 @@ display: block;
 
 export default function ContactList({
     handleDeleteContact,
-  newContacts,
-  contacts,
-  filter
+   contacts
 }) {
-  if (filter==='') {
+  
     return (
       <ul className="contactList">
         {contacts.map(elem => {
@@ -38,25 +36,8 @@ export default function ContactList({
         })}
       </ul>
     );
-  } else {
-    return (
-      <ul className="contactList">
-        {newContacts.map(elem => {
-          return (
-            <ListItemStyles key={uuidv4()}>
-              <SpanStyles>
-                {elem.name} : {elem.number}
-              </SpanStyles>
-              <ButtonStyles type="button" onClick={handleDeleteContact}>
-                Delete
-              </ButtonStyles>
-            </ListItemStyles>
-          );
-        })}
-      </ul>
-    );
   }
-}
+
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -66,13 +47,8 @@ ContactList.propTypes = {
       number: PropTypes.string,
     }),
   ),
-  newContacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string,
-    }),
-  ),
+  
+  
   handleDeleteContact: PropTypes.func,
   filter: PropTypes.string
 };
