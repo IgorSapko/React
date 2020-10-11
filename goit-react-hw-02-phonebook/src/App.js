@@ -37,7 +37,7 @@ export default class App extends Component {
   };
 
   handleCheckContact = checkedContact => {
-    const { contacts, name } = this.state;
+    const { contacts } = this.state;
     console.log('name', name);
     contacts.filter((elem, i) => {
       if (elem.name.toLowerCase() === checkedContact.name.toLowerCase()) {
