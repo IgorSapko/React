@@ -16,9 +16,18 @@ export default class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contactsFromLocalStorage = localStorage.getItem('contacts');
+
+    if (contactsFromLocalStorage) {
+      this.setState({ contacts: JSON.parse(contactsFromLocalStorage) });
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
-    console.log('prevState', prevState.contacts);
-    console.log('this.state', this.state.contacts);
+    if (this.state !== prevState) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    };
+    
   }
 
   handleChange = ({ target }) => {
@@ -26,15 +35,10 @@ export default class App extends Component {
     this.setState({ [name]: value });
   };
 
-  handleDeleteContact = e => {
+  handleDeleteContact = id => {
     const { contacts } = this.state;
 
-    let contactsAfterDeleting = contacts.filter(elem => {
-      return (
-        elem.name.toLowerCase() !==
-        e.nativeEvent.path[1].childNodes[0].childNodes[0].textContent.toLowerCase()
-      );
-    });
+    let contactsAfterDeleting = contacts.filter(contact => contact.id !== id);
 
     this.setState(() => {
       return { contacts: contactsAfterDeleting };
@@ -42,53 +46,35 @@ export default class App extends Component {
   };
 
   handleCheckContact = checkedContact => {
-    const { contacts, name } = this.state;
-    contacts.filter((elem, i) => {
-      if (elem.name.toLowerCase() === checkedContact.name.toLowerCase()) {
-        return alert(`${elem.name} is already in сontacts`);
-      } else if (
-        elem.name.toLowerCase() !== checkedContact.name.toLowerCase() &&
-        i === contacts.length - 1
-      ) {
-        contacts.push(checkedContact);
+    const { contacts } = this.state;
 
-        this.setState(() => {
-          return { contacts: contacts };
-        });
+    const isExistContact = contacts.some(
+      contact =>
+        contact.name.toLocaleLowerCase() === checkedContact.name.toLowerCase(),
+    );
+    if (isExistContact) {
+      alert(`${elem.name} is already in сontacts`);
+    } else {
+      this.setState(prevState => {
+        return { contacts: [...prevState.contacts, checkedContact] };
+      });
+    }
+  };
+
+  handleFilterContact = () => {
+    const { filter, contacts } = this.state;
+    if (!filter) return contacts;
+    return contacts.filter(elem => {
+      let comparePartofName = elem.name.substr(0, filter.length);
+      if (comparePartofName.toLowerCase() === filter.toLowerCase()) {
+        return elem.name;
       }
     });
   };
-  handleUpdateContacts = contacts => {
-    this.setState(() => {
-      return { contacts: contacts };
-    });
-  };
-
-  handleFilterContact = contacts => {
-    let newContacts = [];
-    const { filter } = this.state;
-    if (filter) {
-      contacts.map(elem => {
-        let comparePartofName = elem.name.substr(0, filter.length);
-
-        if (comparePartofName.toLowerCase() === filter.toLowerCase()) {
-          newContacts.push(elem);
-        }
-      });
-    }
-
-    return newContacts;
-  };
 
   render() {
-    const { contacts, filter } = this.state;
-    let newContacts = this.handleFilterContact(contacts);
-    let contactsForContactList;
-    if (filter) {
-      contactsForContactList = newContacts;
-    } else {
-      contactsForContactList = contacts;
-    }
+    const { filter } = this.state;
+
     return (
       <div>
         <h1>Phonebook</h1>
@@ -100,7 +86,7 @@ export default class App extends Component {
         <h2>Contacts</h2>
         <Filter handleChange={this.handleChange} filter={filter} />
         <ContactList
-          contacts={contactsForContactList}
+          contacts={this.handleFilterContact()}
           handleDeleteContact={this.handleDeleteContact}
         ></ContactList>
       </div>

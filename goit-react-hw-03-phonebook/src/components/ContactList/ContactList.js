@@ -15,29 +15,27 @@ display: block;
 &:not(:last-child){margin-bottom:16px}
 `;
 
-export default function ContactList({
-    handleDeleteContact,
-   contacts
-}) {
-  
-    return (
-      <ul className="contactList">
-        {contacts.map(elem => {
-          return (
-            <ListItemStyles key={uuidv4()}>
-              <SpanStyles>
-                {elem.name} : {elem.number}
-              </SpanStyles>
-              <ButtonStyles type="button" onClick={handleDeleteContact}>
-                Delete
-              </ButtonStyles>
-            </ListItemStyles>
-          );
-        })}
-      </ul>
-    );
-  }
-
+export default function ContactList({ handleDeleteContact, contacts }) {
+  return (
+    <ul className="contactList">
+      {contacts.map(elem => {
+        return (
+          <ListItemStyles key={uuidv4()}>
+            <SpanStyles>
+              {elem.name} : {elem.number}
+            </SpanStyles>
+            <ButtonStyles
+              type="button"
+              onClick={() => handleDeleteContact(elem.id)}
+            >
+              Delete
+            </ButtonStyles>
+          </ListItemStyles>
+        );
+      })}
+    </ul>
+  );
+}
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -47,10 +45,9 @@ ContactList.propTypes = {
       number: PropTypes.string,
     }),
   ),
-  
-  
+
   handleDeleteContact: PropTypes.func,
-  filter: PropTypes.string
+  filter: PropTypes.string,
 };
 
 ContactList.defaultProps = {
