@@ -3,7 +3,6 @@ import PropTypes, { number } from 'prop-types';
 import styles from '../../styles/styles.css';
 
 function Searchbar({ onSubmit }) {
-
   return (
     <header className="Searchbar">
       <form className="SearchForm" onSubmit={onSubmit}>
