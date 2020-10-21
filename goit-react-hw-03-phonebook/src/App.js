@@ -47,13 +47,14 @@ export default class App extends Component {
 
   handleCheckContact = checkedContact => {
     const { contacts } = this.state;
-
+    let existContactname
     const isExistContact = contacts.some(
       contact =>
-        contact.name.toLocaleLowerCase() === checkedContact.name.toLowerCase(),
+      { existContactname = contact.name;
+      return  contact.name.toLocaleLowerCase() === checkedContact.name.toLowerCase()}
     );
     if (isExistContact) {
-      alert(`${elem.name} is already in сontacts`);
+      alert(`${existContactname} is already in сontacts`);
     } else {
       this.setState(prevState => {
         return { contacts: [...prevState.contacts, checkedContact] };
