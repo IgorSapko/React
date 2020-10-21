@@ -33,11 +33,11 @@ export default class App extends Component {
         behavior: 'smooth',
       });
     }
-    const { valueOfInput, responce } = this.state;
+    const { valueOfInput, isLoading } = this.state;
 
     if (prevState.valueOfInput !== valueOfInput && valueOfInput) {
       requestApi.resetPage();
-
+      this.setState({ isLoading: true });
       requestApi
         .fetchImages(valueOfInput, requestApi.numberOfPage)
         .then(arrOfFetchedImages =>
@@ -73,7 +73,6 @@ export default class App extends Component {
   };
 
   escFunction = event => {
-    console.log('asdfasdfasdsdf');
     if (event.code === 'Escape' && this.state.dataOfBigImage.src) {
       this.setState({
         dataOfBigImage: {
@@ -86,17 +85,15 @@ export default class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-console.log(e)
-    const input = document.querySelector('input');
 
-    if (!input.value) {
+    const input = document.querySelector('input');
+    const inputValue = e.target.elements[1].value;
+    if (!inputValue) {
       alert('Please enter Your request');
       return;
     }
 
-    this.setState({ valueOfInput: input.value, isLoading: true });
-
-    input.value = '';
+    this.setState({ valueOfInput: inputValue });
   };
 
   handleClick = () => {
