@@ -1,22 +1,35 @@
 import axios from 'axios';
 
 export default {
-  APIKey: '17968712-6412cf5ccb97a4541594b82f1',
-  numberOfPage: 1,
-  incrementPage: function () {
-    this.numberOfPage += 1;
-  },
-  resetPage: function () {
-    this.numberOfPage = 1;
+  APIKey: 'd2391c473c2dd48960a52c6837b69990',
+
+   id: false,
+
+  fetchTrendingFilms: function () {
+   let url = `https://api.themoviedb.org/3/trending/all/day?api_key=${this.APIKey}`;
+    return axios.get(url).then(responce => responce.data.results);
   },
 
-  fetchImages: function (serchQuery) {
-    return axios
-      .get(
-        `https://pixabay.com/api/?q=${serchQuery}&page=${this.numberOfPage}&key=${this.APIKey}&image_type=photo&orientation=horizontal&per_page=12`,
-      )
-      .then(responce => {
-        return responce.data.hits;
-      });
+  fetchFilmByQuery: function (serchQuery) {
+    let  url = `https://api.themoviedb.org/3/search/movie?api_key=${this.APIKey}&query=${serchQuery}&page=1`;
+    return axios.get(url).then(responce => responce.data.results);
+  },
+
+  fetchFilmByID: function (id) {
+    console.log('id only');
+    let  url = ` https://api.themoviedb.org/3/movie/${id}?api_key=${this.APIKey}`;
+    return axios.get(url).then(responce => responce.data);
+  },
+
+  fetchCastFilm: function (id) {
+    console.log('cast');
+    let  url = ` https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.APIKey}`;
+    return axios.get(url).then(responce => responce.data);
+  },
+
+  fetchReviewsFilm: function (id) {
+    console.log('reviews');
+    let  url = ` https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${this.APIKey}`;
+    return axios.get(url).then(responce => responce.data.results);
   },
 };
