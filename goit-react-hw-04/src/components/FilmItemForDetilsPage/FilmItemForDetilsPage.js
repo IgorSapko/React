@@ -1,11 +1,11 @@
 import React, { Component,lazy,Suspense } from 'react';
 import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
-// import Cast from '../../Pages/Cast/Cast';
+import Cast from '../../Pages/Cast/Cast';
 import Reviews from '../../Pages/Reviews/Reviews';
 import movieDetailsPageStyles from 'styled-components';
 import LoaderComponent from '../../components/Loader/Loader';
 
-const Cast = lazy(()=>import('../../Pages/Cast/Cast'))
+// const Cast = lazy(()=>import('../../Pages/Cast/Cast'))
 
 const GeneralWrapperStyles = movieDetailsPageStyles.div`
 display: flex;
@@ -94,7 +94,7 @@ export default class FilmItemForDetilsPage extends Component {
         <Switch>
           <Route exact path="/movies/:movieId/cast" component={Cast} />
           <Route exact path="/movies/:movieId/reviews" component={Reviews} />
-          {/* <Redirect to='/'/> */}
+            {/* <Redirect to="/" /> */}
         </Switch>
         </Suspense>
       </>

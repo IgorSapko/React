@@ -13,13 +13,7 @@ export default class App extends Component {
     isLoading: false,
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.responce !== this.state.responce &&
-      prevState.responce.length !== 0
-    ) {
-    }
-  }
+
 
 
   render() {
@@ -31,7 +25,7 @@ export default class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/movies" component={MoviesPage} />
           
-          <Route path="/movies/:movieId" component={MovieDetailsPage} />
+          <Route  path="/movies/:movieId" component={MovieDetailsPage} />
           
           <Redirect to="/" />
         </Switch>
