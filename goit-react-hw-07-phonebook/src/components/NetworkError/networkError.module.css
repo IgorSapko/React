@@ -1,0 +1,21 @@
+
+   .wrapper {
+    position: absolute; 
+    z-index: 100;
+    display: inline-flex;
+        background-color: red;
+    border-radius: 10px;
+    width: 200px;
+    height: 100px;
+    align-items: center;
+    text-align: center;
+  
+  }
+  
+  .errorDescr {
+  padding-left: 10%;
+    color: brown;
+  
+  
+  } 
+  

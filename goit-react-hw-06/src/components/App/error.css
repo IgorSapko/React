@@ -1,0 +1,17 @@
+.qq-enter {
+  transform: translateX(0);
+}
+
+.qq-enter-active {
+  transform: translateX(-200px);
+  transition: all 3000ms linear;
+}
+
+.qq-exit {
+  transform: translateX(-200px);
+}
+
+.qq-exit-active {
+  transform: translateX(0);
+  transition: all 3000ms linear;
+}

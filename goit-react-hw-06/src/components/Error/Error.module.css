@@ -1,0 +1,38 @@
+.wrapper {
+  display: inline-block;
+  position: absolute;;
+  margin-left: 100%;
+ padding-top: 50px; 
+  background-color: red;
+  border-radius: 10px;
+  width: 200px;
+  height: 100px;
+  text-align: left;
+  align-items: center;
+}
+
+.errorDescr {
+  display: block;
+  color: white;
+  width: fit-content;
+  margin: 0 auto;
+
+} 
+
+.enter {
+    transform: translateX(-100%);
+  }
+  
+  .enterActive {
+    transform: translateX(0);
+    transition: all 3000ms linear;
+  }
+  
+  .exit {
+    transform: translateX(0%);
+  }
+  
+  .exitActive {
+    transform: translateX(-100%);
+    transition: all 3000ms linear;
+  } 

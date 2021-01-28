@@ -1,0 +1,14 @@
+.headline {
+  margin-top: 20px;
+  color: blue;
+  display: block;
+}
+
+.appear {
+  transform: translateX(-100%);
+}
+
+.appearActive {
+  transform: translateX(0);
+  transition: transform 500ms linear;
+}

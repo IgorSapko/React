@@ -1,0 +1,35 @@
+.qq-enter {
+  transform: translateX(0);
+}
+
+.qq-enter-active {
+  transform: translateX(-100%);
+  transition: all 3000ms linear;
+}
+
+.qq-exit {
+  transform: translateX(-100%);
+}
+
+.qq-exit-active {
+  transform: translateX(0);
+  transition: all 3000ms linear;
+}
+
+/* .qq-enter  {
+    transform: scale(0);
+  }
+  
+  .qq-enter-active  {
+    transform: scale(1);
+    transition: transform 3000ms ease-in-out;
+  }
+  
+  .qq-exit {
+    transform: scale(1);
+  }
+  
+  .qq-exit-active {
+    transform: scale(0);
+    transition: transform 3000ms ease-in-out;
+  } */

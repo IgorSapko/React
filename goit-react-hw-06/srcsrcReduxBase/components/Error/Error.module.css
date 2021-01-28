@@ -1,0 +1,31 @@
+ .wrapper {
+  display: inline-flex;
+  background-color: red;
+  border-radius: 10px;
+  width: 200px;
+  height: 100px;
+  text-align: left;
+  align-items: center;
+}
+
+.errorDescr {
+  color: white;
+} 
+
+.enter {
+    transform: translateX(-100%);
+  }
+  
+  .enterActive {
+    transform: translateX(0);
+    transition: all 3000ms linear;
+  }
+  
+  .exit {
+    transform: translateX(0%);
+  }
+  
+  .exitActive {
+    transform: translateX(-100%);
+    transition: all 3000ms linear;
+  } 
