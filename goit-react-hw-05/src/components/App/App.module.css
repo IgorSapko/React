@@ -1,0 +1,18 @@
+#root {
+  display: flex;
+}
+
+.headline {
+  margin-top: 20px;
+  color: blue;
+  text-align: start;
+}
+
+.appear {
+  transform: translateX(-100%);
+}
+
+.appearActive {
+  transform: translateX(0);
+  transition: transform 500ms linear;
+}
